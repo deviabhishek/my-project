@@ -33,6 +33,6 @@ jobs:
       with:
         image: devopsship/myapp
         registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.DOCKER_USERNAME || 'default-username' }}
+        password: ${{ secrets.DOCKER_PASSWORD || 'default-password' }}
          
