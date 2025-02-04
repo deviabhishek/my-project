@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Java CI with Gradle and Docker
 
 on:
   push:
@@ -26,16 +26,17 @@ jobs:
     - name: Build Java Project with Gradle
       run: ./gradlew clean build
 
-    - name: List files in build/libs
+    - name: List files in build/libs/
       run: ls -lah build/libs/
 
     - name: Verify JAR File Exists
       run: |
-        if [ ! -f build/libs/my-app-1.0-SNAPSHOT.jar ]; then
-          echo "JAR file not found, exiting...";
+        JAR_FILE=$(ls build/libs/*.jar | head -n 1)
+        if [ -z "$JAR_FILE" ]; then
+          echo "JAR file not found, exiting..."
           exit 1;
         else
-          echo "JAR file found!";
+          echo "JAR file found: $JAR_FILE";
         fi
 
     - name: Log in to Docker Hub
