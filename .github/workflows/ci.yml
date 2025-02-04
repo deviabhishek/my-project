@@ -24,7 +24,10 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Java Project with Gradle
-      run: ./gradlew build
+      run: ./gradlew clean build
+
+    - name: List files in build/libs
+      run: ls -lah build/libs/
 
     - name: Verify JAR File Exists
       run: |
