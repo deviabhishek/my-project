@@ -25,9 +25,15 @@ jobs:
 
     - name: Build Java Project with Gradle
       run: ./gradlew build
-      
+
     - name: Verify JAR File Exists
-      run: ls -lah build/libs/
+      run: |
+        if [ ! -f build/libs/my-app-1.0-SNAPSHOT.jar ]; then
+          echo "JAR file not found, exiting...";
+          exit 1;
+        else
+          echo "JAR file found!";
+        fi
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
