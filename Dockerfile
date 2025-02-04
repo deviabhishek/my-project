@@ -2,7 +2,11 @@ FROM openjdk:8-jre-alpine
 
 EXPOSE 8080
 
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
+# Copy the built JAR file to the container
+COPY ./build/libs/*.jar /usr/app/my-app.jar
+
+# Set the working directory
 WORKDIR /usr/app
 
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "my-app.jar"]
